@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mason Pham</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+    --bg: #0e1116;
+    --card: #161a22;
+    --border: #232936;
+    --border-hover: #333d4f;
+    --text: #f0f2f6;
+    --muted: #9aa4b4;
+    --dim: #6b7488;
+    --accent: #ff4444;
+    --accent-soft: #3a1414;
+  }
+  :root[data-theme='light'] {
+    --bg: #ffffff; --card: #f7f8fa; --border: #e6e8ec; --border-hover: #d3d7de;
+    --text: #14181f; --muted: #565e6e; --dim: #8a92a1; --accent: #d62f2f; --accent-soft: #fceaea;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif; line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  /* nav */
+  nav { border-bottom: 1px solid var(--border); position: sticky; top: 0;
+        background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(8px); z-index: 20; }
+  .nav { display: flex; align-items: center; height: 62px; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+  .brand { font-weight: 700; letter-spacing: -.2px; }
+  .nav-links { margin-left: auto; display: flex; gap: 26px; }
+  .nav-links a { color: var(--muted); font-size: 15px; text-decoration: none; transition: color .15s; }
+  .nav-links a:hover { color: var(--text); }
+  .toggle { margin-left: 24px; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 17px; }
+  .toggle:hover { color: var(--accent); }
+
+  /* hero */
+  .hero { display: flex; gap: 56px; align-items: center; padding: 96px 0 56px; }
+  .hero-photo {
+    width: 220px; height: 220px; border-radius: 50%; flex-shrink: 0;
+    object-fit: cover; border: 2px solid var(--border); background: var(--card);
+  }
+  .hero > div { flex: 1; }
+  .hero h1 { font-size: 52px; font-weight: 800; letter-spacing: -1.5px; line-height: 1.05; }
+  .hero .tag { color: var(--accent); font-weight: 600; font-size: 14px; letter-spacing: .5px; text-transform: uppercase; margin-bottom: 10px; }
+  .hero p { color: var(--muted); margin-top: 18px; font-size: 17px; max-width: 620px; line-height: 1.7; }
+  .hero p strong { color: var(--text); font-weight: 600; }
+  .cta { display: flex; gap: 12px; margin-top: 28px; }
+  .btn { padding: 11px 22px; border-radius: 10px; font-size: 14px; font-weight: 600; text-decoration: none; transition: .15s; }
+  .btn-primary { background: var(--accent); color: #0b1220; }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost { border: 1px solid var(--border); color: var(--text); }
+  .btn-ghost:hover { border-color: var(--border-hover); }
+  @media (max-width: 720px) {
+    .hero { flex-direction: column; text-align: center; align-items: center; gap: 28px; padding-top: 64px; }
+    .hero-photo { width: 160px; height: 160px; }
+    .hero h1 { font-size: 40px; }
+    .hero p { text-align: left; } .cta { justify-content: center; }
+  }
+
+  section { padding: 56px 0; border-top: 1px solid var(--border); }
+  .sec-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 28px; }
+  .about > p { color: var(--muted); margin-bottom: 32px; font-size: 16px; max-width: 680px; }
+  .about strong { color: var(--text); font-weight: 600; }
+
+  /* consistent panels */
+  .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 860px){ .info-grid { grid-template-columns: 1fr; } }
+  .skill-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
+  @media (max-width: 860px){ .skill-grid { grid-template-columns: 1fr; } }
+  .panel { border: 1px solid var(--border); border-radius: 12px; padding: 22px; background: var(--card); }
+  .panel h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--dim); margin-bottom: 14px; }
+  .panel .val { color: var(--text); font-weight: 600; font-size: 15px; }
+  .panel .val + .val { margin-top: 6px; }
+  .panel .meta { color: var(--muted); font-size: 14px; margin-top: 3px; }
+
+  .bubbles { display: flex; flex-wrap: wrap; gap: 10px; }
+  .bubble { border: 1px solid var(--border); border-radius: 999px; padding: 7px 15px;
+            font-size: 14px; color: var(--muted); text-decoration: none; transition: border-color .15s, color .15s; background: var(--bg); }
+  a.bubble:hover { border-color: var(--border-hover); color: var(--accent); }
+  .bubble span { color: var(--dim); margin-left: 4px; }
+  .read-more { display: inline-block; margin-top: 28px; padding: 10px 20px; border: 1px solid var(--border);
+               border-radius: 10px; color: var(--text); font-size: 14px; font-weight: 500; text-decoration: none;
+               font-family: 'Inter', system-ui, sans-serif; transition: border-color .15s, color .15s; }
+  .read-more:hover { border-color: var(--border-hover); color: var(--accent); }
+
+  .proj { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 860px){ .proj { grid-template-columns: 1fr; } }
+  .p-card { border: 1px solid var(--border); border-radius: 12px; padding: 20px; background: var(--card);
+            text-decoration: none; color: inherit; transition: .15s; display: block; }
+  .p-card:hover { border-color: var(--border-hover); transform: translateY(-2px); }
+  .p-card h3 { font-size: 17px; margin-bottom: 6px; }
+  .p-card p { color: var(--muted); font-size: 14px; }
+
+  footer { border-top: 1px solid var(--border); padding: 30px 0; color: var(--dim); font-size: 14px; }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--accent); }
+
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 22px; }
+  .sec-head h2 { margin-bottom: 0; }
+  .sec-head a { color: var(--accent); font-size: 14px; text-decoration: none; }
+  .sec-head a:hover { text-decoration: underline; }
+
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav">
+    <span class="brand">Mason Pham</span>
+    <div class="nav-links">
+      <a href="#top">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+    </div>
+    <button class="toggle" id="toggle" aria-label="Toggle theme">☾</button>
+  </div>
+</nav>
+
+<div class="wrap" id="top">
+  <header class="hero">
+    <img class="hero-photo" src="photo.jpg" alt="Mason Pham"
+         onerror="this.style.background='var(--accent-soft)';this.alt='';this.removeAttribute('src');" />
+    <div>
+      <h1>Mason Pham</h1>
+      <p>IT Support Specialist at Kraft Kennedy and cybersecurity student, working toward a <strong>SOC Analyst / Cybersecurity Analyst</strong> role. Hands-on with technical support, Active Directory, Microsoft 365, and security operations, with a long-term interest in the MSP/MSSP space.</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="#about">About me</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="about">
+    <div class="sec-title">About</div>
+
+    <div class="info-grid">
+      <div class="panel">
+        <h3>Current Role</h3>
+        <div class="val">SPG Support Specialist (IT Support)</div>
+        <div class="meta">Kraft &amp; Kennedy, Inc. · 2026 – Present</div>
+      </div>
+      <div class="panel">
+        <h3>Education</h3>
+        <div class="val">Cybersecurity</div>
+        <div class="meta">Lone Star College · Expected 2029</div>
+      </div>
+      <div class="panel">
+        <h3>Certifications</h3>
+        <div class="bubbles">
+          <span class="bubble">CompTIA Security+</span>
+          <span class="bubble">CySA+ (in progress)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-bottom:16px">
+      <h3>Experience</h3>
+      <div class="bubbles">
+        <span class="bubble">SPG Support Specialist · Kraft &amp; Kennedy · 2026 – Present</span>
+        <span class="bubble">IT/Networking Intern · Aristoi Classical Academy · 2026</span>
+        <span class="bubble">IT Intern · Blackmore Partners · 2026</span>
+        <span class="bubble">Team Member · Chick-fil-A · 2025 – 2026</span>
+      </div>
+    </div>
+
+    <div class="sec-title" style="margin-top:8px">Technical Skills</div>
+    <div class="skill-grid">
+      <div class="panel">
+        <h3>IT &amp; Systems</h3>
+        <div class="bubbles">
+          <span class="bubble">Active Directory</span>
+          <span class="bubble">Microsoft 365 Admin</span>
+          <span class="bubble">MFA Enrollment</span>
+          <span class="bubble">MDM / Apple School Manager</span>
+          <span class="bubble">Networking</span>
+          <span class="bubble">Technical Support</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Security &amp; Tools</h3>
+        <div class="bubbles">
+          <span class="bubble">Nmap</span>
+          <span class="bubble">Vulnerability Scanning</span>
+          <span class="bubble">ScreenConnect</span>
+          <span class="bubble">ConnectWise</span>
+          <span class="bubble">Wavity ITSM</span>
+          <span class="bubble">Power Automate</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Links</h3>
+      <div class="bubbles">
+        <a class="bubble" href="https://www.linkedin.com/in/masonpham" target="_blank" rel="noopener">LinkedIn <span>update handle</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-title">Projects</div>
+    <div class="proj">
+      <a class="p-card" href="#"><h3>Active Directory on Azure</h3><p>Deployed Windows Server VMs in Azure, promoted a domain controller, configured VNets and subnets, joined client VMs to the domain, and managed users, groups, OUs, and GPOs.</p></a>
+      <a class="p-card" href="#"><h3>Network Recon with Nmap</h3><p>Used Nmap for host discovery and port scanning to map active devices, open ports, and running services, building foundational network reconnaissance skills in a lab environment.</p></a>
+    </div>
+  </section>
+</div>
+
+<footer><div class="wrap">© <span id="yr"></span> Mason Pham</div></footer>
+
+<script>
+  const r = document.documentElement;
+  const s = localStorage.getItem('theme'); if (s) r.setAttribute('data-theme', s);
+  document.getElementById('toggle').onclick = () => {
+    const n = r.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    r.setAttribute('data-theme', n); localStorage.setItem('theme', n);
+  };
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
